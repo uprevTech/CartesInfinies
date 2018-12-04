@@ -1,0 +1,102 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.title {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  text-shadow: 2px 2px #000;
+  color: #FFF;
+}
+
+.mainMenu{
+  margin-top: 15em;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  background-color: #00000088;
+  border: 5px solid black;
+}
+
+.submit{
+  margin-top: 1em;
+}
+
+.slide1,.slide2,.slide3,.slide4 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+}
+
+.slide1 {
+  background: url(../../assets/images/mtgCaster.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  animation:fade 24s infinite;
+  -webkit-animation:fade 24s infinite;
+
+}
+.slide2 {
+  background: url(../../assets/images/mtgJace.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  animation:fade2 24s infinite;
+  -webkit-animation:fade2 24s infinite;
+}
+.slide3 {
+  background: url(../../assets/images/mtgHydra.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  animation:fade3 16s infinite;
+  -webkit-animation:fade3 24s infinite;
+}
+.slide4 {
+  background: url(../../assets/images/mtgWarlock.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  animation:fade4 16s infinite;
+  -webkit-animation:fade4 24s infinite;
+}
+@keyframes fade
+{
+  0%   {opacity:1}
+  25% { opacity: 0}
+  50% { opacity: 0}
+  75% { opacity: 0}
+  100% { opacity: 1}
+}
+@keyframes fade2
+{
+  0%   {opacity:0}
+  25% { opacity: 1}
+  50% { opacity: 0}
+  75% { opacity: 0}
+  100% { opacity: 0}
+}
+@keyframes fade3
+{
+  0%   {opacity: 0}
+  25% { opacity: 0}
+  50% { opacity: 1}
+  75% { opacity: 0}
+  100% { opacity: 0}
+}
+@keyframes fade4
+{
+  0%   {opacity:0}
+  25% { opacity: 0}
+  50% { opacity: 0}
+  75% { opacity: 1}
+  100% { opacity: 0}
+}
+
