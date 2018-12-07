@@ -15,35 +15,36 @@
 
 
 <!-- Remeber to put all the content you want on top of the slider below the slider code -->
-
-<div class="row">
-  <div class="col-1"></div>
-  <div class="col-10">
-    <h1 class="">Welcome back user!</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <h1 class="title">Welcome back user!</h1>
+    </div>
+    <div class="col-1"></div>
   </div>
-  <div class="col-1"></div>
-</div>
 
-<div class="row">
-  <div class="col-1"></div>
-  <div class="col-10">
-    <div>
-      <div class="mainMenu">
-        <div class="col-1"></div>
-        <button class="btn btn-default col-10 submit">Play a game</button>
-        <div class="col-1"></div>
-        <div class="col-1"></div>
-        <button class="btn btn-default col-10 submit">Browse Cards</button>
-        <div class="col-1"></div>
-        <div class="col-1"></div>
-        <button class="btn btn-default col-10 submit">Make a deck</button>
-        <div class="col-1"></div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div>
+        <div class="mainMenu">
+          <div class="col-1"></div>
+          <button class="btn btn-default col-10 submit">Play a game</button>
+          <div class="col-1"></div>
+          <div class="col-1"></div>
+          <div class="col-10"></div>
+          <button class="btn btn-default col-10 submit" [routerLink]="['/card']">Browse Cards</button>
+          <div class="col-1"></div>
+          <div class="col-1"></div>
+          <button class="btn btn-default col-10 submit">Make a deck</button>
+          <div class="col-1"></div>
+        </div>
       </div>
     </div>
+    <div class="col-1"></div>
   </div>
-  <div class="col-1"></div>
 </div>
-
 
 
   <!--  <div class="slider">
