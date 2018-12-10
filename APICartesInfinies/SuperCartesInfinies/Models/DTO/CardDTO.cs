@@ -7,6 +7,7 @@ namespace SuperCartesInfinies.Models.DTO
 {
     public class CardDTO
     {
+        public int Id;
         public string Name;
         public int Attack;
         public int Defense;

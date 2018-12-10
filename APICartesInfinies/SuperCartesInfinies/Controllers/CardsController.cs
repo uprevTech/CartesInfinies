@@ -66,6 +66,7 @@ namespace SuperCartesInfinies.Controllers
             {
                 CardDTO currentCard = new CardDTO
                 {
+                    Id = card.CardId,
                     Name = card.Name,
                     Attack = card.Attack,
                     Defense = card.Defense,
@@ -82,53 +83,48 @@ namespace SuperCartesInfinies.Controllers
             return output;
         }
 
+        /// <summary>
+        /// Buy card to put in players collection. 
+        /// </summary>
+        /// <returns>the new point balance</returns>
+        [Route("api/Cards/BuyCard")]
+        public int BuyCard(int cardId)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return int.MinValue;
+            }
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+            Card cardToBuy = db.Cards.Find(cardId);
+            int userBalance = currentUser.Points;
+            if (userBalance < cardToBuy.Cost)
+            {
+                return int.MinValue;
+            }
+            
+            currentUser.Collection.Add(cardToBuy);
+
+            //substract points from user
+            currentUser.Points = userBalance - cardToBuy.Cost;
+
+            return currentUser.Points;
+        }
+
         // GET: api/Cards/5
-        [ResponseType(typeof(Card))]
-        public IHttpActionResult GetCard(int id)
-        {
-            Card card = db.Cards.Find(id);
-            if (card == null)
-            {
-                return NotFound();
-            }
+        //[ResponseType(typeof(Card))]
+        //public IHttpActionResult GetCard(int id)
+        //{
+        //    Card card = db.Cards.Find(id);
+        //    if (card == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(card);
-        }
-
-        // PUT: api/Cards/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCard(int id, Card card)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != card.CardId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(card).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CardExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return Ok(card);
+        //}
+        
 
         // POST: api/Cards
         [ResponseType(typeof(Card))]

@@ -10,6 +10,7 @@ namespace SuperCartesInfinies.Models
     {
         [Key]
         public int DeckId { get; set; }
+        public string Name { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual List<Card> Cards { get; set; }
     }

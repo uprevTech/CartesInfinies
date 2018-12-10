@@ -247,6 +247,7 @@
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Deck.cs" />
     <Compile Include="Models\DTO\CardDTO.cs" />
+    <Compile Include="Models\DTO\CreateDeckDTO.cs" />
     <Compile Include="Models\DTO\DeckDTO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

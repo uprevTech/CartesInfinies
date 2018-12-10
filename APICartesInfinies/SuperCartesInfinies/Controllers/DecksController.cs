@@ -48,7 +48,7 @@ namespace SuperCartesInfinies.Controllers
             }
         }
 
-        // GET: api/Decks
+        
         [Route("api/Decks/GetDecks")]
         public List<DeckDTO> GetDecks()
         {
@@ -60,12 +60,17 @@ namespace SuperCartesInfinies.Controllers
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
 
             List<DeckDTO> output = new List<DeckDTO>();
-            foreach (Deck deck in currentUser.Decks)
+            foreach (Deck currentDeck in currentUser.Decks)
             {
-                List<Card> cardsInDeck = deck.Cards.ToList();
-
+                List<Card> cardsInDeck = currentDeck.Cards.ToList();
+                DeckDTO newDeck = new DeckDTO
+                {
+                    Id = currentDeck.DeckId,
+                    Cards = cardsInDeck,
+                    Name = currentDeck.Name
+                };
+                output.Add(newDeck);
             };
-
 
             return output;
         }
@@ -82,71 +87,69 @@ namespace SuperCartesInfinies.Controllers
 
             return Ok(deck);
         }
-
-        // PUT: api/Decks/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDeck(int id, Deck deck)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != deck.DeckId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(deck).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DeckExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        
 
         // POST: api/Decks
-        [ResponseType(typeof(Deck))]
-        public IHttpActionResult PostDeck(Deck deck)
+        [Route("api/Decks/CreateDeck")]
+        public DeckDTO CreateDeck(CreateDeckDTO pDeck)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+            //Deck must not have same name as other deck for current user
+            List<Deck> currentDecks = currentUser.Decks.ToList();
+            foreach (Deck currentDeck in currentDecks)
+            {
+                if (currentDeck.Name == pDeck.Name)
+                {
+                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+                }
             }
 
-            db.Decks.Add(deck);
+            // add deck to user
+            Deck newDeck = new Deck
+            {
+                Name = pDeck.Name,
+                Cards = pDeck.Cards
+            };
+            currentUser.Decks.Add(newDeck);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = deck.DeckId }, deck);
+
+            // return DeckDTO
+            Deck createdDeck = currentUser.Decks.First(x => x.Name == pDeck.Name);
+            DeckDTO output = new DeckDTO
+            {
+                Name = createdDeck.Name,
+                Cards = createdDeck.Cards,
+                Id = createdDeck.DeckId
+            };
+
+            return output;
         }
 
         // DELETE: api/Decks/5
         [ResponseType(typeof(Deck))]
         public IHttpActionResult DeleteDeck(int id)
         {
-            Deck deck = db.Decks.Find(id);
-            if (deck == null)
+            string currentUserId = User.Identity.GetUserId();
+
+            //make sure current user has ownership of the deck to delete
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+            Deck deckToDelete = currentUser.Decks.FirstOrDefault(x => x.DeckId == id);
+            if (deckToDelete == null)
             {
-                return NotFound();
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            db.Decks.Remove(deck);
+            db.Decks.Remove(deckToDelete);
             db.SaveChanges();
 
-            return Ok(deck);
+            return Ok(deckToDelete);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -25,6 +26,7 @@ namespace SuperCartesInfinies.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -47,6 +49,19 @@ namespace SuperCartesInfinies.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        [Route("api/Account/GetPoints")]
+        public int GetPoints()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return int.MaxValue;
+            }
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+            return currentUser.Points;
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
