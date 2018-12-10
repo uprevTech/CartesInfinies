@@ -7,6 +7,7 @@ import { PlayerComponent } from './player/player.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { StoreComponent } from './store/store.component';
+import {CardService} from './service/card.service';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { StoreComponent } from './store/store.component';
       {path: ':player', component: CardComponent}
     ])
   ],
-  providers: [],
+  providers: [CardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

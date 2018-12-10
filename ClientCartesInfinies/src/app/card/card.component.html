@@ -14,7 +14,13 @@
       <div>
         <div class="cardsMenu">
           <div class="row">
-            <div class="col-3">
+            <div *ngFor="let a of cardService.getCards()" class="col-3">
+              <div class="card">
+                <p>{{a.name}}</p>
+                <p>{{a.attack}}  /  {{a.defense}}</p>
+              </div>
+            </div>
+            <!--<div class="col-3">
               <div class="card">
 
               </div>
@@ -34,8 +40,6 @@
 
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-3">
               <div class="card">
 
@@ -50,12 +54,7 @@
               <div class="card">
 
               </div>
-            </div>
-            <div class="col-3">
-              <div class="card">
-
-              </div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
