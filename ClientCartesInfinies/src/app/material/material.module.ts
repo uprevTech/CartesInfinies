@@ -27,7 +27,6 @@ import {
     MatExpansionModule
   ],
   exports: [MatInputModule, MatButtonModule, MatCheckboxModule, BrowserAnimationsModule,
-    MatCardModule, MatToolbarModule, MatIconModule, MatListModule, MatExpansionModule],
-  declarations: []
+    MatCardModule, MatToolbarModule, MatIconModule, MatListModule, MatExpansionModule]
 })
 export class MaterialModule { }
