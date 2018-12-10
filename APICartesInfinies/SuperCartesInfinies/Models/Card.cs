@@ -14,6 +14,7 @@ namespace SuperCartesInfinies.Models
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Cost { get; set; }
+        public string Image { get; set; }
 
         public virtual List<ApplicationUser> ApplicationUsers { get; set; }
         public virtual List<Deck> Decks { get; set; }

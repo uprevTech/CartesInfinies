@@ -14,12 +14,25 @@
       <div>
         <div class="cardsMenu">
           <div class="row">
-            <div *ngFor="let a of cardService.getCards()" class="col-3">
+            <div *ngFor="let a of cardList" class="col-3">
               <div class="card">
                 <p>{{a.name}}</p>
                 <p>{{a.attack}}  /  {{a.defense}}</p>
               </div>
             </div>
+
+
+            <mat-card  *ngFor="let a of cardList">
+              <mat-card-header>
+                <mat-card-title>{{a.name}}</mat-card-title>
+              </mat-card-header>
+
+
+              <img mat-card-image src="{{a.image}}">
+
+
+
+            </mat-card>
             <!--<div class="col-3">
               <div class="card">
 

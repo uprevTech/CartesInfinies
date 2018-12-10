@@ -44,7 +44,8 @@ namespace SuperCartesInfinies
                     Attack = i + 1,
                     Defense = i + 2,
                     Cost = i + 1,
-                    Name = "CardNo" + i
+                    Name = "CardNo" + i,
+                    Image = "../../assets/images/mtgCaster.jpg"
                 };
                 context.Cards.Add(newCard);
                 context.SaveChanges();

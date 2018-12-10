@@ -20,7 +20,7 @@ namespace SuperCartesInfinies.Controllers
     public class CardsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
         public CardsController()
@@ -70,7 +70,8 @@ namespace SuperCartesInfinies.Controllers
                     Name = card.Name,
                     Attack = card.Attack,
                     Defense = card.Defense,
-                    Cost = card.Cost
+                    Cost = card.Cost,
+                    Image = card.Image
                 };
                 if (card.ApplicationUsers.Contains(currentUser))
                     currentCard.Acquired = true;

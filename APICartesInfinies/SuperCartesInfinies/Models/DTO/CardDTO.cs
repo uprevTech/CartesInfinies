@@ -13,5 +13,6 @@ namespace SuperCartesInfinies.Models.DTO
         public int Defense;
         public int Cost;
         public bool Acquired;
+        public string Image;
     }
 }
