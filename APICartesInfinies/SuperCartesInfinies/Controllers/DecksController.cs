@@ -52,7 +52,6 @@ namespace SuperCartesInfinies.Controllers
         [Route("api/Decks/GetDecks")]
         public List<DeckDTO> GetDecks()
         {
-            // TODO t'es rendu ici Gab
             if (!User.Identity.IsAuthenticated)
             {
                 return null;
