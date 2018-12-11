@@ -3,6 +3,8 @@ import {Card} from '../../Model/card';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, pipe} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Deck} from '../../Model/deck';
+import {CreateDeckDTO} from '../../Model/DTO/create-deck-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +23,6 @@ export class CardService {
   }
 
   getCards(): Observable<Card[]> {
-    /*let card1: Card = new Card('Bibendum', 2, 3, 4);
-    let card2: Card = new Card('Spradarajan', 10, 36, 12);
-    let card3: Card = new Card('Ventriloque', 4, 6, 8);
-    let cards: Card[] = [];
-    cards.push(card1);
-    cards.push(card2);
-    cards.push(card3);
-    console.log(cards);
-    return cards;*/
-
     return this.http.get('api/Cards/GetCards', this.getOptions()).pipe(map(r => {
       let results = [];
       const response = r as any;
@@ -42,5 +34,33 @@ export class CardService {
       }
       return results;
     }));
+  }
+
+  getDecks(): Observable<Deck[]> {
+    let results = [];
+
+    return this.http.get('api/Decks/GetDecks', this.getOptions()).pipe(map(r => {
+      const response = r as any;
+      for (let deck of response) {
+        let newDeck = new Deck(deck.Id, deck.Name, deck.Cards);
+        results.push(newDeck);
+      }
+      return results;
+    }));
+  }
+
+  /*
+  createDeck(deckToCreate: CreateDeckDTO): Observable<Deck> {
+    return this.http.post('api/Decks/CreateDeck', deckToCreate, this.getOptions()).pipe(map(r => {
+      const response = r as any;
+      let output = new Deck(response.Id, response.Name, response.Cards)
+      return output;
+    }));
+  }
+  */
+  createDeck(deckToCreate: CreateDeckDTO) {
+    this.http.post('api/Decks/CreateDeck', deckToCreate, this.getOptions()).subscribe(r => {
+      console.log(r);
+    });
   }
 }

@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {FormsModule} from '@angular/forms';
 import {MaterialModule} from './material/material.module';
+import { MyDecksComponent } from './my-decks/my-decks.component';
+import { DeckCreationComponent } from './deck-creation/deck-creation.component';
 
 
 
@@ -22,7 +24,9 @@ import {MaterialModule} from './material/material.module';
     PlayerComponent,
     StoreComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    MyDecksComponent,
+    DeckCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +36,8 @@ import {MaterialModule} from './material/material.module';
     RouterModule.forRoot([
       {path: '', component: LoginComponent},
       {path: 'SignUp', component: SignUpComponent},
+      {path: 'MyDecks', component: MyDecksComponent},
+      {path: 'DeckCreation', component: DeckCreationComponent},
       {path: 'Player', component: PlayerComponent},
       {path: ':player', component: CardComponent}
     ])

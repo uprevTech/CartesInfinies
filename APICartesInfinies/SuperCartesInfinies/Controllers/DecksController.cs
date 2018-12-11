@@ -91,8 +91,11 @@ namespace SuperCartesInfinies.Controllers
 
         // POST: api/Decks
         [Route("api/Decks/CreateDeck")]
-        public DeckDTO CreateDeck(CreateDeckDTO pDeck)
+        [ResponseType(typeof(Deck))]
+        [HttpPost]
+        public IHttpActionResult CreateDeck(CreateDeckDTO pDeck)
         {
+            // TODO Echec de la serialisation
             if (!ModelState.IsValid)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -122,14 +125,14 @@ namespace SuperCartesInfinies.Controllers
 
             // return DeckDTO
             Deck createdDeck = currentUser.Decks.First(x => x.Name == pDeck.Name);
-            DeckDTO output = new DeckDTO
-            {
-                Name = createdDeck.Name,
-                Cards = createdDeck.Cards,
-                Id = createdDeck.DeckId
-            };
+            //DeckDTO output = new DeckDTO
+            //{
+            //    Name = createdDeck.Name,
+            //    Cards = createdDeck.Cards,
+            //    Id = createdDeck.DeckId
+            //};
 
-            return output;
+            return Ok(createdDeck);
         }
 
         // DELETE: api/Decks/5
