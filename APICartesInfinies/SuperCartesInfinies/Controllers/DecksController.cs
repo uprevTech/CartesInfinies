@@ -145,27 +145,27 @@ namespace SuperCartesInfinies.Controllers
 
 
             // return DeckDTO
-            Deck createdDeck = currentUser.Decks.First(x => x.Name == pDeck.Name);
-            List<CardDTO> cardsToAdd = new List<CardDTO>();
-            foreach (Card carte in createdDeck.Cards)
-            {
-                cardsToAdd.Add(new CardDTO
-                {
-                    Acquired = true,
-                    Attack = carte.Attack,
-                    Cost = carte.Cost,
-                    Defense = carte.Defense,
-                    Id = carte.Id,
-                    Image = carte.Image,
-                    Name = carte.Name
-                });
-            }
-            CreatedDeckDTO output = new CreatedDeckDTO
-            {
-                Name = createdDeck.Name,
-                Cards = cardsToAdd,
-                Id = createdDeck.DeckId
-            };
+            //Deck createdDeck = currentUser.Decks.First(x => x.Name == pDeck.Name);
+            //List<CardDTO> cardsToAdd = new List<CardDTO>();
+            //foreach (Card carte in createdDeck.Cards)
+            //{
+            //    cardsToAdd.Add(new CardDTO
+            //    {
+            //        Acquired = true,
+            //        Attack = carte.Attack,
+            //        Cost = carte.Cost,
+            //        Defense = carte.Defense,
+            //        Id = carte.Id,
+            //        Image = carte.Image,
+            //        Name = carte.Name
+            //    });
+            //}
+            //CreatedDeckDTO output = new CreatedDeckDTO
+            //{
+            //    Name = createdDeck.Name,
+            //    Cards = cardsToAdd,
+            //    Id = createdDeck.DeckId
+            //};
 
             return Ok();
         }
