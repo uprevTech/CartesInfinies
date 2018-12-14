@@ -66,7 +66,7 @@ namespace SuperCartesInfinies.Controllers
             {
                 CardDTO currentCard = new CardDTO
                 {
-                    Id = card.CardId,
+                    Id = card.Id,
                     Name = card.Name,
                     Attack = card.Attack,
                     Defense = card.Defense,
@@ -139,7 +139,7 @@ namespace SuperCartesInfinies.Controllers
             db.Cards.Add(card);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = card.CardId }, card);
+            return CreatedAtRoute("DefaultApi", new { id = card.Id }, card);
         }
 
         // DELETE: api/Cards/5
@@ -169,7 +169,7 @@ namespace SuperCartesInfinies.Controllers
 
         private bool CardExists(int id)
         {
-            return db.Cards.Count(e => e.CardId == id) > 0;
+            return db.Cards.Count(e => e.Id == id) > 0;
         }
     }
 }

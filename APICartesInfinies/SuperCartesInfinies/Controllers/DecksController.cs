@@ -62,14 +62,27 @@ namespace SuperCartesInfinies.Controllers
             List<DeckDTO> output = new List<DeckDTO>();
             foreach (Deck currentDeck in currentUser.Decks)
             {
-                List<Card> cardsInDeck = currentDeck.Cards.ToList();
-                DeckDTO newDeck = new DeckDTO
-                {
+                DeckDTO deckToDeckDTO = new DeckDTO {
                     Id = currentDeck.DeckId,
-                    Cards = cardsInDeck,
+                    Cards = new List<CardDTO>(),
                     Name = currentDeck.Name
                 };
-                output.Add(newDeck);
+                //add cardDTOs to deckDTO
+                List<Card> cardsInDeck = currentDeck.Cards.ToList();
+                foreach (Card carte in cardsInDeck)
+                {
+                    deckToDeckDTO.Cards.Add(new CardDTO
+                    {
+                        Acquired = true,
+                        Attack = carte.Attack,
+                        Cost = carte.Cost,
+                        Defense = carte.Defense,
+                        Id = carte.Id,
+                        Image = carte.Image,
+                        Name = carte.Name
+                    });
+                }
+                output.Add(deckToDeckDTO);
             };
 
             return output;
@@ -91,7 +104,7 @@ namespace SuperCartesInfinies.Controllers
 
         // POST: api/Decks
         [Route("api/Decks/CreateDeck")]
-        [ResponseType(typeof(Deck))]
+        //[ResponseType(typeof(CreatedDeckDTO))]
         [HttpPost]
         public IHttpActionResult CreateDeck(CreateDeckDTO pDeck)
         {
@@ -113,11 +126,19 @@ namespace SuperCartesInfinies.Controllers
                 }
             }
 
+            //fucking cave il faut aller chercher la carte dans la bd avec le id dans pDeck.
+            List<Card> c = new List<Card>();
+            foreach (Card card in pDeck.Cards)
+            {
+                Card current = db.Cards.FirstOrDefault(x => x.Id == card.Id);
+                c.Add(current);
+            }
+
             // add deck to user
             Deck newDeck = new Deck
             {
                 Name = pDeck.Name,
-                Cards = pDeck.Cards
+                Cards = c
             };
             currentUser.Decks.Add(newDeck);
             db.SaveChanges();
@@ -125,14 +146,28 @@ namespace SuperCartesInfinies.Controllers
 
             // return DeckDTO
             Deck createdDeck = currentUser.Decks.First(x => x.Name == pDeck.Name);
-            //DeckDTO output = new DeckDTO
-            //{
-            //    Name = createdDeck.Name,
-            //    Cards = createdDeck.Cards,
-            //    Id = createdDeck.DeckId
-            //};
+            List<CardDTO> cardsToAdd = new List<CardDTO>();
+            foreach (Card carte in createdDeck.Cards)
+            {
+                cardsToAdd.Add(new CardDTO
+                {
+                    Acquired = true,
+                    Attack = carte.Attack,
+                    Cost = carte.Cost,
+                    Defense = carte.Defense,
+                    Id = carte.Id,
+                    Image = carte.Image,
+                    Name = carte.Name
+                });
+            }
+            CreatedDeckDTO output = new CreatedDeckDTO
+            {
+                Name = createdDeck.Name,
+                Cards = cardsToAdd,
+                Id = createdDeck.DeckId
+            };
 
-            return Ok(createdDeck);
+            return Ok();
         }
 
         // DELETE: api/Decks/5

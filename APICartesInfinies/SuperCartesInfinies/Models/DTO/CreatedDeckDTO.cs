@@ -5,10 +5,10 @@ using System.Web;
 
 namespace SuperCartesInfinies.Models.DTO
 {
-    public class DeckDTO
+    public class CreatedDeckDTO
     {
         public int Id;
-        public List<CardDTO> Cards;
         public string Name;
+        public List<CardDTO> Cards;
     }
 }

@@ -26,29 +26,30 @@ namespace SuperCartesInfinies
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             var user = new ApplicationUser();
+            ApplicationUser test = UserManager.FindByEmail("a@a.a");
 
-
-
-
-            user.UserName = "a@a.a";
-            user.Email = "a@a.a";
-
-            string userPWD = "Password1!";
-
-            var result = await UserManager.CreateAsync(user, userPWD);
-
-            for (int i = 0; i < 10; i++)
+            if (test == null)
             {
-                Card newCard = new Card
+                user.UserName = "a@a.a";
+                user.Email = "a@a.a";
+
+                string userPWD = "Password1!";
+
+                var result = await UserManager.CreateAsync(user, userPWD);
+
+                for (int i = 0; i < 10; i++)
                 {
-                    Attack = i + 1,
-                    Defense = i + 2,
-                    Cost = i + 1,
-                    Name = "CardNo" + i,
-                    Image = "../../assets/images/mtgCaster.jpg"
-                };
-                context.Cards.Add(newCard);
-                context.SaveChanges();
+                    Card newCard = new Card
+                    {
+                        Attack = i + 1,
+                        Defense = i + 2,
+                        Cost = i + 1,
+                        Name = "CardNo" + i,
+                        Image = "../../assets/images/mtgCaster.jpg"
+                    };
+                    context.Cards.Add(newCard);
+                    context.SaveChanges();
+                }
             }
         }
     }

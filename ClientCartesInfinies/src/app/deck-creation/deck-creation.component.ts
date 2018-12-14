@@ -12,10 +12,10 @@ import {CreateDeckDTO} from '../../Model/DTO/create-deck-dto';
 export class DeckCreationComponent implements OnInit {
 
   constructor(public cardService: CardService) {
-    this.cards = new Array<Card>();
+    this.cards = [];
   }
   name: string;
-  cards: Array<Card>;
+  cards: Card[];
   allCards: Card[];
 
   ngOnInit() {
@@ -30,15 +30,23 @@ export class DeckCreationComponent implements OnInit {
 
   addCardToDeck(card: Card) {
     let wasInDeck = false;
-    for (let currentCard in this.cards) {
-      if (currentCard.name === card.name) {
-        this.cards.splice(this.cards.indexOf(card), 1);
+    for (let index = 0; index < this.cards.length; index++) {
+      if (this.cards[index].name === card.name) {
+        this.cards = arrayRemove(this.cards, card);
         wasInDeck = true;
       }
     }
     if (wasInDeck === false) {
       this.cards.push(card);
       console.log(this.cards);
+    }
+
+    function arrayRemove(arr, value) {
+
+      return arr.filter(function(ele) {
+        return ele !== value;
+      });
+
     }
   }
 }
