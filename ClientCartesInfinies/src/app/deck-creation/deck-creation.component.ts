@@ -3,6 +3,7 @@ import {Card} from '../../Model/card';
 import {CardService} from '../service/card.service';
 import {Deck} from '../../Model/deck';
 import {CreateDeckDTO} from '../../Model/DTO/create-deck-dto';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-deck-creation',
@@ -11,7 +12,7 @@ import {CreateDeckDTO} from '../../Model/DTO/create-deck-dto';
 })
 export class DeckCreationComponent implements OnInit {
 
-  constructor(public cardService: CardService) {
+  constructor(public cardService: CardService, public router: Router) {
     this.cards = [];
   }
   name: string;
@@ -24,8 +25,8 @@ export class DeckCreationComponent implements OnInit {
 
   createDeck() {
     let deckToCreate = new CreateDeckDTO(this.name, this.cards);
-    console.log(deckToCreate)
     this.cardService.createDeck(deckToCreate);
+    this.router.navigate(['MyDecks']);
   }
 
   addCardToDeck(card: Card) {
@@ -38,7 +39,6 @@ export class DeckCreationComponent implements OnInit {
     }
     if (wasInDeck === false) {
       this.cards.push(card);
-      console.log(this.cards);
     }
 
     function arrayRemove(arr, value) {
@@ -46,7 +46,6 @@ export class DeckCreationComponent implements OnInit {
       return arr.filter(function(ele) {
         return ele !== value;
       });
-
     }
   }
 }

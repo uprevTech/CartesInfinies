@@ -5,13 +5,16 @@ import {Observable, pipe} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Deck} from '../../Model/deck';
 import {CreateDeckDTO} from '../../Model/DTO/create-deck-dto';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
 
+
   constructor(public http: HttpClient) { }
+
 
   getOptions() {
     return {
@@ -42,7 +45,19 @@ export class CardService {
     return this.http.get('api/Decks/GetDecks', this.getOptions()).pipe(map(r => {
       const response = r as any;
       for (let deck of response) {
-        let newDeck = new Deck(deck.Id, deck.Name, deck.Cards);
+
+        let cardsInDeck = [];
+        for (let index = 0; index < deck.Cards.length; index++) {
+          cardsInDeck[index] = new Card(
+            deck.Cards[index].Id,
+            deck.Cards[index].Name,
+            deck.Cards[index].Attack,
+            deck.Cards[index].Defense,
+            deck.Cards[index].Cost,
+            deck.Cards[index].Acquired = true,
+            deck.Cards[index].Image);
+        }
+        let newDeck = new Deck(deck.Id, deck.Name, cardsInDeck);
         results.push(newDeck);
       }
       return results;

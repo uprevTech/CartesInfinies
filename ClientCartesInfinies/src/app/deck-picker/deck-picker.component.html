@@ -1,0 +1,4 @@
+<div *ngFor="let decks of myDecks">
+  {{decks.name}}
+  <button (click)="chooseDeck(decks)">Pick</button>
+</div>

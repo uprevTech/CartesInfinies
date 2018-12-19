@@ -14,6 +14,9 @@ import {FormsModule} from '@angular/forms';
 import {MaterialModule} from './material/material.module';
 import { MyDecksComponent } from './my-decks/my-decks.component';
 import { DeckCreationComponent } from './deck-creation/deck-creation.component';
+import { DeckPickerComponent } from './deck-picker/deck-picker.component';
+import { MatchComponent } from './match/match.component';
+import {MatchService} from './service/match.service';
 
 
 
@@ -26,7 +29,9 @@ import { DeckCreationComponent } from './deck-creation/deck-creation.component';
     LoginComponent,
     SignUpComponent,
     MyDecksComponent,
-    DeckCreationComponent
+    DeckCreationComponent,
+    DeckPickerComponent,
+    MatchComponent
   ],
   imports: [
     BrowserModule,
@@ -38,11 +43,13 @@ import { DeckCreationComponent } from './deck-creation/deck-creation.component';
       {path: 'SignUp', component: SignUpComponent},
       {path: 'MyDecks', component: MyDecksComponent},
       {path: 'DeckCreation', component: DeckCreationComponent},
+      {path: 'DeckPicker', component: DeckPickerComponent},
+      {path: 'Match', component: MatchComponent},
       {path: 'Player', component: PlayerComponent},
       {path: ':player', component: CardComponent}
     ])
   ],
-  providers: [CardService, UserService],
+  providers: [CardService, UserService, MatchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

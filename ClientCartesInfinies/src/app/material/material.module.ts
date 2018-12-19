@@ -8,13 +8,14 @@ import {
   MatExpansionModule,
   MatIconModule,
   MatInputModule,
-  MatListModule,
+  MatListModule, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 
 @NgModule({
   declarations: [],
   imports: [
+    MatSnackBarModule,
     BrowserAnimationsModule,
     CommonModule,
     MatInputModule,
