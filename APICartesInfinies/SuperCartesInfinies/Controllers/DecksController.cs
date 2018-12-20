@@ -203,28 +203,25 @@ namespace SuperCartesInfinies.Controllers
             return Ok();
         }
 
-        [Route("api/Account/GetPoints")]
-        public int GetPoints()
+        [Route("api/Decks/GetPoints")]
+        public IHttpActionResult GetPoints()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return int.MaxValue;
-            }
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
 
-            return currentUser.Points;
+            return Ok(currentUser.Points);
         }
 
-        [Route("api/Account/AddVictoryPoints")]
-        public int AddVictoryPoints()
+        [Route("api/Decks/AddVictoryPoints")]
+        public IHttpActionResult AddVictoryPoints()
         {
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             
-            currentUser.Points = currentUser.Points + 10;
-            UserManager.Update(currentUser);
-            return currentUser.Points;
+            int newPoints = currentUser.Points + 10;
+            db.Users.FirstOrDefault(x => x.Id == currentUserId).Points = newPoints;
+            db.SaveChanges();
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

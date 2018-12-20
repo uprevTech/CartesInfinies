@@ -36,10 +36,6 @@ export class MatchComponent implements OnInit {
   }
 
   playCard() {
-    // this.userService.addVictoryPoints();
-    // return;
-
-
     if (!this.matchService.gameOver) {
       this.matchService.playCard();
     }

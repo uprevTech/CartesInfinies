@@ -54,6 +54,6 @@ export class UserService {
   }
 
   addVictoryPoints() {
-    this.http.get('api/Account/AddVictoryPoints', this.getOptions()).subscribe(r => r);
+     this.http.post('api/Decks/AddVictoryPoints', null, this.getOptions()).subscribe(r => r);
   }
 }
