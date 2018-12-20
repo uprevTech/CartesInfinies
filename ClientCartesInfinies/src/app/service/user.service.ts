@@ -56,4 +56,8 @@ export class UserService {
   addVictoryPoints() {
      this.http.post('api/Decks/AddVictoryPoints', null, this.getOptions()).subscribe(r => r);
   }
+
+  signout() {
+    this.http.post( 'api/Account/Logout', null, this.getOptions()).subscribe();
+  }
 }

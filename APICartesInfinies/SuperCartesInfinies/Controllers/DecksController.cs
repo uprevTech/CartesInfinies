@@ -126,7 +126,7 @@ namespace SuperCartesInfinies.Controllers
                 }
             }
 
-            //fucking cave il faut aller chercher la carte dans la bd avec le id dans pDeck.
+            // Diantrement cave il faut aller chercher la carte dans la bd avec le id dans pDeck.
             List<Card> c = new List<Card>();
             foreach (Card card in pDeck.Cards)
             {
