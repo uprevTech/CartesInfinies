@@ -7,6 +7,7 @@ import {Deck} from '../../Model/deck';
 import {CreateDeckDTO} from '../../Model/DTO/create-deck-dto';
 import {forEach} from '@angular/router/src/utils/collection';
 import {User} from '../../Model/user';
+import {CardMatch} from '../../Model/card-match';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,23 @@ export class CardService {
     this.http.post('api/Decks/CreateDeck', deckToCreate, this.getOptions()).subscribe(r => {
       console.log(r);
     });
+  }
+
+  convertCardsToCardMatch(cardsToConvert: Card[]): CardMatch[] {
+    let result = [];
+
+    for (let i = 0; i < cardsToConvert.length; i++) {
+      let card = new CardMatch(
+        cardsToConvert[i].id,
+        cardsToConvert[i].name,
+        cardsToConvert[i].attack,
+        cardsToConvert[i].defense,
+        cardsToConvert[i].image,
+        false
+      );
+      result.push(card);
+    }
+    return result;
   }
 
   createStarterDeck () {

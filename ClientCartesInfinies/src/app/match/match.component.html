@@ -1,6 +1,6 @@
 <div class="background"></div>
 
-
+<textarea readonly [(ngModel)]="matchService.textArea" rows="4" cols="50"></textarea>
 <!-->BattleField<!-->
 <div class="row">
   <div class="col-12">
@@ -14,7 +14,6 @@
             <div class="container">
               <mat-card-header>
                 <mat-card-title>{{a.name}}</mat-card-title>
-                <mat-card-subtitle>{{a.cost}}$</mat-card-subtitle>
               </mat-card-header>
               <img mat-card-image src="{{a.image}}">
               <mat-card-content>
@@ -33,7 +32,6 @@
             <div class="container">
               <mat-card-header>
                 <mat-card-title>{{a.name}}</mat-card-title>
-                <mat-card-subtitle>{{a.cost}}$</mat-card-subtitle>
               </mat-card-header>
               <img mat-card-image src="{{a.image}}">
               <mat-card-content>
@@ -52,31 +50,32 @@
 
 
 <!-->Carte dans la main <!-->
-  <div class="row">
-    <div class="col-12">
-      <div class="cardsMenu">
-        HAND
-        <button (click)="playCard()">Cast Card</button>
-        <button (click)="attack()">Attack</button>
-        <button (click)="endTurn()">End Turn</button>
+<div class="row">
+  <div class="col-12">
+    <div class="cardsMenu">
+      HAND
+      <button (click)="playCard()">Cast Card</button>
+      <button (click)="attack()">Attack</button>
+      <button (click)="endTurn()">End Turn</button>
 
-        <div class="row">
-          <div *ngFor="let a of matchService.myDeck" class="col-3" (click)="selectedCardToPutOnBattlefield(a)">
-            <mat-card class="card">
-              <div class="container">
-                <mat-card-header>
-                  <mat-card-title>{{a.name}}</mat-card-title>
-                  <mat-card-subtitle>{{a.cost}}$</mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image src="{{a.image}}">
-                <mat-card-content>
-                  <h3>Atk: {{a.attack}} / Def: {{a.defense}}</h3>
-                </mat-card-content>
-              </div>
-            </mat-card>
-          </div>
+      <div class="row">
+        <div *ngFor="let a of matchService.myDeck" class="col-3" (click)="selectedCardToPutOnBattlefield(a)">
+          <mat-card class="card">
+            <div class="container">
+              <mat-card-header>
+                <mat-card-title>{{a.name}}</mat-card-title>
+              </mat-card-header>
+              <img mat-card-image src="{{a.image}}">
+              <mat-card-content>
+                <h3>Atk: {{a.attack}} / Def: {{a.defense}}</h3>
+              </mat-card-content>
+            </div>
+          </mat-card>
         </div>
       </div>
     </div>
   </div>
+</div>
 <!-->Carte dans la main <!-->
+
+

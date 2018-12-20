@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class UserService {
 
+
   constructor(public http: HttpClient) { }
 
   httpOptions = {
@@ -16,6 +17,15 @@ export class UserService {
       'Content-Type':  'application/json',
     })
   };
+
+  getOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('Token')
+      })
+    };
+  }
 
   createUser(email: string, password: string, confirmPassword: string): Observable<string> {
     const user = new User(email, password, confirmPassword);
@@ -41,5 +51,9 @@ export class UserService {
 
     return this.http.post<any>('/api/Token', body.toString(), httpOptions);
 
+  }
+
+  addVictoryPoints() {
+    this.http.get('api/Account/AddVictoryPoints', this.getOptions()).subscribe(r => r);
   }
 }

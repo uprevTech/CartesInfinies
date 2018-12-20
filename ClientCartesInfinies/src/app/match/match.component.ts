@@ -4,6 +4,9 @@ import {CardService} from '../service/card.service';
 import {Card} from '../../Model/card';
 import {MatchService} from '../service/match.service';
 import {MatSnackBar} from '@angular/material';
+import {CardMatch} from '../../Model/card-match';
+import {UserService} from '../service/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-match',
@@ -12,7 +15,9 @@ import {MatSnackBar} from '@angular/material';
 })
 export class MatchComponent implements OnInit {
 
-  constructor(public matchService: MatchService, public snackBar: MatSnackBar) {
+
+
+  constructor(public matchService: MatchService, public userService: UserService, public snackBar: MatSnackBar, public router: Router) {
 
   }
 
@@ -20,35 +25,73 @@ export class MatchComponent implements OnInit {
     this.matchService.startMatch();
   }
 
-  selectedCardForAttack(a: Card) {
+  selectedCardForAttack(a: CardMatch) {
     this.matchService.selectedCardForAttack = a;
   }
-  selectedCardForDefense(a: Card) {
+  selectedCardForDefense(a: CardMatch) {
     this.matchService.selectedCardForDefense = a;
   }
-  selectedCardToPutOnBattlefield(a: Card) {
+  selectedCardToPutOnBattlefield(a: CardMatch) {
     this.matchService.selectedCardToPutOnBattlefield = a;
   }
 
   playCard() {
-    this.matchService.playCard();
+    // this.userService.addVictoryPoints();
+    // return;
+
+
+    if (!this.matchService.gameOver) {
+      this.matchService.playCard();
+    }
   }
 
   attack() {
-    this.matchService.attack();
+    if (this.matchService.gameOver) {
+      return;
+    }
+
+    if (!this.matchService.playedCardThisTurn) {
+      this.snackBar.open('You must play a card Before attacking', 'Close');
+    } else {
+
+      this.matchService.attack();
+      if (this.matchService.gameOver) {
+        // Donner les points pour la victoire
+        if (this.matchService.playerWin) {
+          alert('You Win!');
+          this.userService.addVictoryPoints();
+        } else {
+          alert('You Lose!');
+        }
+        // rediriger vers page accueil
+        this.router.navigate(['/Player']);
+      }
+    }
   }
 
   endTurn() {
+    if (this.matchService.gameOver) {
+      return;
+    }
+
     if (!this.matchService.playedCardThisTurn) {
 
       this.snackBar.open('You must play a card during your turn', 'Close');
 
-    } else if (!this.matchService.attackedWithAll) {
-
-      this.snackBar.open('Every card on battlefield must attack during turn', 'Close');
-
     } else {
       this.matchService.endTurn();
+      // le ai va avoir jouer son tour rendu ici alors on peux verifier si le jeu est termine
+      if (this.matchService.gameOver) {
+        // Donner les points pour la victoire
+        if (this.matchService.playerWin) {
+          alert('You Win!');
+          this.userService.addVictoryPoints();
+        } else {
+          alert('You Lose!');
+        }
+        // rediriger vers page accueil
+        this.router.navigate(['/Player']);
+      }
     }
   }
 }

@@ -20,7 +20,8 @@ export class DeckPickerComponent implements OnInit {
   }
 
   chooseDeck(deck: Deck) {
-    this.serviceMatch.setDeckForMatch(deck.cards);
+    let cards = this.serviceCarte.convertCardsToCardMatch(deck.cards);
+    this.serviceMatch.setDeckForMatch(cards);
     this.router.navigate(['Match']);
   }
 }

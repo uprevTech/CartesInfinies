@@ -50,19 +50,7 @@ namespace SuperCartesInfinies.Controllers
                 _userManager = value;
             }
         }
-
-        [Route("api/Account/GetPoints")]
-        public int GetPoints()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return int.MaxValue;
-            }
-            string currentUserId = User.Identity.GetUserId();
-            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-
-            return currentUser.Points;
-        }
+        
 
         // POST api/Account/Register
         [AllowAnonymous]
