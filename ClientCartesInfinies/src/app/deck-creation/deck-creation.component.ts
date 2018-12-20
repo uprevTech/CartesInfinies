@@ -24,9 +24,13 @@ export class DeckCreationComponent implements OnInit {
   }
 
   createDeck() {
-    let deckToCreate = new CreateDeckDTO(this.name, this.cards);
-    this.cardService.createDeck(deckToCreate);
-    this.router.navigate(['MyDecks']);
+    if (this.cards.length === 5) {
+      let deckToCreate = new CreateDeckDTO(this.name, this.cards);
+      this.cardService.createDeck(deckToCreate);
+      this.router.navigate(['MyDecks']);
+    } else {
+      alert ('Decks must contain exactly 5 cards in order for them to be valid');
+    }
   }
 
   addCardToDeck(card: Card) {
@@ -34,11 +38,15 @@ export class DeckCreationComponent implements OnInit {
     for (let index = 0; index < this.cards.length; index++) {
       if (this.cards[index].name === card.name) {
         this.cards = arrayRemove(this.cards, card);
+        console.log(this.cards);
         wasInDeck = true;
       }
     }
-    if (wasInDeck === false) {
+    if (this.cards.length >= 5) {
+      alert('Unable to add a new card: Decks can only contain 5 cards');
+    } else if (wasInDeck === false && this.cards.length < 5) {
       this.cards.push(card);
+      console.log(this.cards);
     }
 
     function arrayRemove(arr, value) {
