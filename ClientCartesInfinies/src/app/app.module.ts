@@ -17,6 +17,7 @@ import { DeckCreationComponent } from './deck-creation/deck-creation.component';
 import { DeckPickerComponent } from './deck-picker/deck-picker.component';
 import { MatchComponent } from './match/match.component';
 import {MatchService} from './service/match.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -36,6 +37,7 @@ import {MatchService} from './service/match.service';
   imports: [
     BrowserModule,
     FormsModule,
+    NgbModule.forRoot(),
     HttpClientModule,
     MaterialModule,
     RouterModule.forRoot([

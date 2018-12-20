@@ -5,6 +5,7 @@
   z-index: -100;
   background: url(../../assets/images/backgroundCards.jpg) no-repeat center fixed;
   background-size: cover;
+  filter:blur(px);
 }
 
 .cardsMenu{
@@ -33,9 +34,11 @@
 .card:focus {
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
-  padding: 0;
   border: none;
-  background: none;
-  box-shadow: 0 0px 10px 10px rgb(241, 242, 222);
   color: #e4e5d5;
+}
+
+.notOwned{
+  filter: grayscale(100%);
+  opacity: 0.7;
 }
