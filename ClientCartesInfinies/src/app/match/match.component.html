@@ -24,27 +24,27 @@
           </mat-card>
         </div>
         <!-->Carte sur battlefield ai <!-->
-
-        <!-->Carte sur battlefield player <!-->
-        <div class="row">
-          <div *ngFor="let a of matchService.myCardsOnBattlefield" class="col-3" (click)="selectedCardForAttack(a)">
-            <mat-card class="card">
-              <div class="container">
-                <mat-card-header>
-                  <mat-card-title>{{a.name}}</mat-card-title>
-                  <mat-card-subtitle>{{a.cost}}$</mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image src="{{a.image}}">
-                <mat-card-content>
-                  <h3>Atk: {{a.attack}} / Def: {{a.defense}}</h3>
-                </mat-card-content>
-              </div>
-            </mat-card>
-          </div>
-        </div>
-        <!-->Carte sur battlefield player <!-->
-
       </div>
+
+      <!-->Carte sur battlefield player <!-->
+      <div class="row">
+        <div *ngFor="let a of matchService.myCardsOnBattlefield" class="col-3" (click)="selectedCardForAttack(a)">
+          <mat-card class="card">
+            <div class="container">
+              <mat-card-header>
+                <mat-card-title>{{a.name}}</mat-card-title>
+                <mat-card-subtitle>{{a.cost}}$</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="{{a.image}}">
+              <mat-card-content>
+                <h3>Atk: {{a.attack}} / Def: {{a.defense}}</h3>
+              </mat-card-content>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+      <!-->Carte sur battlefield player <!-->
+
     </div>
   </div>
 </div>
@@ -57,7 +57,9 @@
       <div class="cardsMenu">
         HAND
         <button (click)="playCard()">Cast Card</button>
+        <button (click)="attack()">Attack</button>
         <button (click)="endTurn()">End Turn</button>
+
         <div class="row">
           <div *ngFor="let a of matchService.myDeck" class="col-3" (click)="selectedCardToPutOnBattlefield(a)">
             <mat-card class="card">

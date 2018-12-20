@@ -34,13 +34,21 @@ export class MatchComponent implements OnInit {
     this.matchService.playCard();
   }
 
+  attack() {
+    this.matchService.attack();
+  }
+
   endTurn() {
     if (!this.matchService.playedCardThisTurn) {
+
       this.snackBar.open('You must play a card during your turn', 'Close');
+
+    } else if (!this.matchService.attackedWithAll) {
+
+      this.snackBar.open('Every card on battlefield must attack during turn', 'Close');
+
+    } else {
+      this.matchService.endTurn();
     }
-    if (!this.matchService.attackedWithAll) {
-      // this.snackBar.open('Every card on battlefield must attack during turn', 'Close');
-    }
-    this.matchService.endTurn();
   }
 }
