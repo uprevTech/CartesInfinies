@@ -190,6 +190,41 @@ namespace SuperCartesInfinies.Controllers
             return Ok(deckToDelete);
         }
 
+        [Route("api/Decks/StarterDeck")]
+        [HttpPost]
+        public IHttpActionResult CreateStarterDeck()
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(u => u.Id == currentUserId);
+
+            List<Deck> currentDecks = currentUser.Decks.ToList();
+
+            if (currentDecks.Count != 0)
+                return Ok();
+
+            List<Card> cardsStarter = new List<Card>();
+            for (int i = 1; i <= 5; i++)
+            {
+                cardsStarter.Add(db.Cards.Find(i));
+            }
+
+            Deck starterDeck = new Deck
+            {
+                Cards = cardsStarter,
+                Name = "Starter Deck"
+            };
+
+            currentUser.Decks.Add(starterDeck);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

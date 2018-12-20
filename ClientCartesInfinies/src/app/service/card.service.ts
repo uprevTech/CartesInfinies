@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {Deck} from '../../Model/deck';
 import {CreateDeckDTO} from '../../Model/DTO/create-deck-dto';
 import {forEach} from '@angular/router/src/utils/collection';
+import {User} from '../../Model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,12 @@ export class CardService {
   createDeck(deckToCreate: CreateDeckDTO) {
     this.http.post('api/Decks/CreateDeck', deckToCreate, this.getOptions()).subscribe(r => {
       console.log(r);
+    });
+  }
+
+  createStarterDeck () {
+    this.http.post('api/Decks/StarterDeck', null, this.getOptions()).subscribe( a => {
+      console.log(a);
     });
   }
 }

@@ -23,6 +23,7 @@ export class SignUpComponent implements OnInit {
     this.userService.createUser(this.email, this.password, this.confirmPassword).subscribe(r => {
       this.userService.loginUser(this.email, this.password).subscribe(res => {
         localStorage.setItem('Token', res.access_token);
+
         this.router.navigate(['Player']);
       });
     });
