@@ -1,6 +1,25 @@
-<div *ngFor="let decks of myDecks">
-  {{decks.name}}
-</div>
+<div class="background"></div>
 
-<a routerLink="/DeckCreation">Create new deck</a>
-<a routerLink="/Player">Main Menu</a>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <div *ngFor="let decks of myDecks">
+        <h2>{{decks.name}}</h2>
+      </div>
+    </div>
+  <div class="col-4"></div>
+</div>
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <a class="btn submit" routerLink="/DeckCreation">Create new deck</a>
+  </div>
+  <div class="col-4"></div>
+</div>
+<div class="row" style="margin-top:2em">
+    <div class="col-4"></div>
+    <div class="col-4">
+  <a class="btn submit" routerLink="/Player">Main Menu</a>
+    </div>
+    <div class="col-4"></div>
+</div>

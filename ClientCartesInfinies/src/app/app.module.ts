@@ -5,7 +5,6 @@ import { CardComponent } from './card/card.component';
 import { PlayerComponent } from './player/player.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
-import { StoreComponent } from './store/store.component';
 import {CardService} from './service/card.service';
 import {UserService} from './service/user.service';
 import { LoginComponent } from './login/login.component';
@@ -26,7 +25,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     CardComponent,
     PlayerComponent,
-    StoreComponent,
     LoginComponent,
     SignUpComponent,
     MyDecksComponent,
