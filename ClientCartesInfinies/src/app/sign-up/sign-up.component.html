@@ -1,5 +1,6 @@
+<div class="background"></div>
 
-<input type="text" placeholder="Email" [(ngModel)]="email">
+<!--<input type="text" placeholder="Email" [(ngModel)]="email">
 
 
 <input type="password" placeholder="Password" [(ngModel)]="password">
@@ -9,4 +10,35 @@
 
 
 
-<button color="primary" (click)="login()">Create Account!</button>
+<button color="primary" (click)="login()">Create Account!</button>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" style="margin-top:2em">
+      <input type="text" placeholder="Email" [(ngModel)]="email">
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" style="margin-top:2em">
+      <input type="password" placeholder="Password" [(ngModel)]="password">
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" style="margin-top:2em">
+      <input type="password" placeholder="Confirm password" [(ngModel)]="confirmPassword">
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" style="margin-top:2em">
+      <button class="btn submit" (click)="login()">Create Account!</button>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
