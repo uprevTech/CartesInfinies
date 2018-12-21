@@ -135,7 +135,7 @@ namespace SuperCartesInfinies
                 Defense = 1,
                 Cost = 100,
                 Name = "Socrates",
-                Image = "../../assets/images/Socrate.jpg"
+                Image = "../../assets/images/socrate.jpg"
             };
             context.Cards.Add(s);
             Card aa = new Card
