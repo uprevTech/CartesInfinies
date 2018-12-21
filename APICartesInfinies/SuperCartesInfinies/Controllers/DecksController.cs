@@ -188,7 +188,9 @@ namespace SuperCartesInfinies.Controllers
             List<Card> cardsStarter = new List<Card>();
             for (int i = 1; i <= 5; i++)
             {
-                cardsStarter.Add(db.Cards.Find(i));
+                Card c = db.Cards.Find(i);
+                currentUser.Collection.Add(c);
+                cardsStarter.Add(c);
             }
 
             Deck starterDeck = new Deck
