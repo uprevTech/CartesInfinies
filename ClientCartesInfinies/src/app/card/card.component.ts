@@ -19,7 +19,7 @@ export class CardComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result;
+    this.modalService.open(content, { centered: true }).result;
   }
 
 //https://ng-bootstrap.github.io/#/components/modal/examples holy shit wtf

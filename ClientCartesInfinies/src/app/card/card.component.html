@@ -1,30 +1,6 @@
 <div class="background"></div>
   
-<ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <mat-card class="card">
-                <div class="container">
-                <mat-card-header>
-                  <mat-card-title>{{name}}</mat-card-title>
-                  <mat-card-subtitle>{{cost}}$</mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image src="{{image}}">
-                <mat-card-content>
-                  <h3>Atk: {{attack}} / Def: {{defense}}</h3>
-                </mat-card-content>
-                </div>
-              </mat-card>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn submit" (click)="modal.close('Save click')">Save</button>
-    </div>
-</ng-template>
+
   
 
 <div class="container">
@@ -35,12 +11,36 @@
     </div>
     <div class="col-1"></div>
   </div>
-
   <div class="row">
     <div class="col-12">
       <div class="cardsMenu">
         <div class="row">
           <div *ngFor="let a of cardList" class="col-3">
+            
+              <!-- model du popup (modal) mis ici pour utiliser les params de a-->
+              <ng-template #content let-modal class="modal">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Purchase or sell</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="container">
+                          <h1>{{a.name}}</h1>
+                          <h4>{{a.cost}}$</h4>
+                        <img mat-card-image src="{{a.image}}">
+                          <h3>Atk: {{a.attack}} / Def: {{a.defense}}</h3>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <div class="col-6">
+                          <button type="button" class="btn submit" (click)="modal.close('Save click')">Purchase</button>
+                      </div>
+                      <div class="col-6">
+                          <button type="button" class="btn submit" (click)="modal.close('Save click')">Sell</button>
+                      </div>
+                  </div>
+              </ng-template>
+              <!-- fin du popup -->
+
               <mat-card class="card" [class.notOwned]="!a.acquired" (click)="open(content)">
                 <div class="container">
                 <mat-card-header>
