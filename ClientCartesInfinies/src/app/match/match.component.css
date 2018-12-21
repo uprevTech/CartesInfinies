@@ -20,7 +20,7 @@
 .card{
   background-color: #000000;
   text-align: center;
-  height: 300px;
+  min-height: 300px;
   margin-top: 20px;
   width: 100%;
   -moz-transition: all 0.3s;
