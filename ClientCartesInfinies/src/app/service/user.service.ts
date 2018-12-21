@@ -59,5 +59,6 @@ export class UserService {
 
   signout() {
     this.http.post( 'api/Account/Logout', null, this.getOptions()).subscribe();
+    localStorage.removeItem('Token');
   }
 }
